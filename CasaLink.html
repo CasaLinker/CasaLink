@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CasaLink - Housing in Zambia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #map {
+            height: 500px;
+            width: 100%;
+            border: 1px solid #ccc;
+        }
+        input, button, textarea {
+            padding: 8px;
+            margin: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .property-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+        }
+        #chat-messages {
+            height: 200px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+    <!-- PapaParse for CSV parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+</head>
+<body>
+    <h1>CasaLink: Find Your Home in Zambia</h1>
+    <div id="auth">
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="signIn()">Login</button>
+        <button onclick="signOut()">Logout</button>
+        <p id="user-status">Not logged in</p>
+    </div>
+    <div>
+        <label for="price">Max Price ($):</label>
+        <input type="number" id="price" placeholder="Enter max price">
+        <label for="bedrooms">Min Bedrooms:</label>
+        <input type="number" id="bedrooms" placeholder="Enter min bedrooms">
+        <button onclick="filterProperties()">Search</button>
+    </div>
+    <div id="map"></div>
+
+    <!-- Feature 1: Users Tracking Their Ads -->
+    <h2>My Listings</h2>
+    <div id="user-listings"></div>
+    <h2>Add New Listing</h2>
+    <div>
+        <input type="text" id="new-title" placeholder="Title">
+        <input type="number" id="new-price" placeholder="Price ($)">
+        <input type="number" id="new-bedrooms" placeholder="Bedrooms">
+        <input type="number" id="new-lat" placeholder="Latitude" step="any">
+        <input type="number" id="new-lng" placeholder="Longitude" step="any">
+        <textarea id="new-desc" placeholder="Description"></textarea>
+        <button onclick="addListing()">Add Listing</button>
+    </div>
+
+    <!-- Feature 2: Users Favoriting Listings -->
+    <h2>My Favorites</h2>
+    <div id="favorites-list"></div>
+
+    <!-- Feature 3: Community Feedback -->
+    <h2>All Listings</h2>
+    <div id="property-list"></div>
+
+    <!-- Feature 5: Support Chat -->
+    <h2>Support Chat</h2>
+    <div id="chat-messages"></div>
+    <input type="text" id="chat-input" placeholder="Type a message">
+    <button onclick="sendMessage()">Send</button>
+
+    <!-- Link to the external JavaScript file -->
+    <script src="CasaLink.js"></script>
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCDDPH8WFyG1doPB7eZs6YCrsB84vgO-4&callback=initMap" async defer></script>
+</body>
+</html>
