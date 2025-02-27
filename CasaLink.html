@@ -52,12 +52,26 @@
         <button onclick="signOut()">Logout</button>
         <p id="user-status">Not logged in</p>
     </div>
+
+    <!-- Step 1: User Profile Section -->
+    <div id="profile-section" style="display: none;">
+        <h2>Your Profile</h2>
+        <input type="text" id="profile-name" placeholder="Name">
+        <input type="number" id="profile-age" placeholder="Age">
+        <textarea id="profile-preferences" placeholder="Preferences (e.g., 'near city center')"></textarea>
+        <button onclick="saveProfile()">Save Profile</button>
+    </div>
+
+    <!-- Step 2 & 5: Advanced Search Filters with Location and Save Search -->
     <div>
         <label for="price">Max Price ($):</label>
         <input type="number" id="price" placeholder="Enter max price">
         <label for="bedrooms">Min Bedrooms:</label>
         <input type="number" id="bedrooms" placeholder="Enter min bedrooms">
+        <label for="location">Location:</label>
+        <input type="text" id="location" placeholder="Enter location (e.g., Lusaka)">
         <button onclick="filterProperties()">Search</button>
+        <button onclick="saveSearch()">Save This Search</button>
     </div>
     <div id="map"></div>
 
@@ -69,6 +83,8 @@
         <input type="text" id="new-title" placeholder="Title">
         <input type="number" id="new-price" placeholder="Price ($)">
         <input type="number" id="new-bedrooms" placeholder="Bedrooms">
+        <!-- Step 2: Added Location Field -->
+        <input type="text" id="new-location" placeholder="Location (e.g., Lusaka)">
         <input type="number" id="new-lat" placeholder="Latitude" step="any">
         <input type="number" id="new-lng" placeholder="Longitude" step="any">
         <textarea id="new-desc" placeholder="Description"></textarea>
@@ -83,9 +99,10 @@
     <h2>All Listings</h2>
     <div id="property-list"></div>
 
-    <!-- Feature 5: Support Chat -->
-    <h2>Support Chat</h2>
+    <!-- Step 4: Updated Chat for User-to-User Messaging -->
+    <h2>Messages</h2>
     <div id="chat-messages"></div>
+    <input type="text" id="recipient-id" placeholder="Recipient User ID">
     <input type="text" id="chat-input" placeholder="Type a message">
     <button onclick="sendMessage()">Send</button>
 
